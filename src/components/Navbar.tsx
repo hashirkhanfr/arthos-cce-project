@@ -89,10 +89,10 @@ export default function Navbar() {
           {/* CTA Button */}
           <div className="hidden lg:flex items-center gap-3">
             <Link
-              href="/donate"
+              href="/contact"
               className="px-5 py-2.5 bg-[#1F6F3D] text-white text-sm font-semibold rounded-full hover:bg-[#14532D] transition-colors shadow-sm"
             >
-              Fund Us
+              Contact Us
             </Link>
           </div>
 
@@ -155,11 +155,11 @@ export default function Navbar() {
             )}
             <div className="pt-3 border-t border-gray-100">
               <Link
-                href="/donate"
+                href="/contact"
                 className="block w-full text-center px-5 py-3 bg-[#1F6F3D] text-white text-sm font-semibold rounded-full hover:bg-[#14532D] transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                Fund Us
+                Contact Us
               </Link>
             </div>
           </div>

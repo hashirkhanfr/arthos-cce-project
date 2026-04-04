@@ -17,21 +17,19 @@ const footerLinks = {
   organization: [
     { label: "About Us", href: "/about" },
     { label: "Gallery", href: "/gallery" },
-    { label: "Blog", href: "/blog" },
+    { label: "Blog", href: "/blogs" },
   ],
   getInvolved: [
     { label: "Volunteer With Us", href: "/volunteer" },
     { label: "Donate Blood", href: "/blood-donation" },
     { label: "Donate Books", href: "/book-donation" },
-    { label: "Fund Us", href: "/donate" },
+    { label: "Contact Us", href: "/contact" },
   ],
 };
 
 const socialLinks = [
-  { icon: Globe, href: "#", label: "Facebook" },
-  { icon: MessageCircle, href: "#", label: "Twitter" },
-  { icon: Camera, href: "#", label: "Instagram" },
-  { icon: PlayCircle, href: "#", label: "YouTube" },
+  { icon: Globe, href: "https://www.facebook.com/always.ready.to.help.others", label: "Facebook" },
+  { icon: Camera, href: "https://www.instagram.com/arthosteam/", label: "Instagram" },
 ];
 
 export default function Footer() {
@@ -134,19 +132,10 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Phone size={16} className="text-[#C9A86A] shrink-0" />
                 <a
-                  href="tel:+923XXXXXXXXX"
+                  href="tel:+923025155918"
                   className="text-sm text-gray-400 hover:text-[#C9A86A] transition-colors"
                 >
-                  +92 3XX-XXXXXXX
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail size={16} className="text-[#C9A86A] shrink-0" />
-                <a
-                  href="mailto:info@arthos.org"
-                  className="text-sm text-gray-400 hover:text-[#C9A86A] transition-colors"
-                >
-                  info@arthos.org
+                  +92 302 5155918
                 </a>
               </li>
             </ul>
