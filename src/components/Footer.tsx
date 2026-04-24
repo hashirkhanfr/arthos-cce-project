@@ -58,7 +58,7 @@ export default function Footer() {
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed mb-6">
               Dedicated to creating a compassionate community through education,
-              health, and humanitarian services across Bangladesh.
+              health, and humanitarian services across Pakistan.
             </p>
             <div className="flex gap-3">
               {socialLinks.map(({ icon: Icon, href, label }) => (
@@ -121,16 +121,16 @@ export default function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin size={16} className="text-[#C9A86A] shrink-0 mt-0.5" />
                 <span className="text-sm text-gray-400">
-                  Dhaka, Bangladesh
+                  Pakistan
                 </span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={16} className="text-[#C9A86A] shrink-0" />
                 <a
-                  href="tel:+8801XXXXXXXXX"
+                  href="tel:+923XXXXXXXXX"
                   className="text-sm text-gray-400 hover:text-[#C9A86A] transition-colors"
                 >
-                  +880 1X-XXXX-XXXX
+                  +92 3XX-XXXXXXX
                 </a>
               </li>
               <li className="flex items-center gap-3">

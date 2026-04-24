@@ -15,8 +15,8 @@ export function formatDate(date: Date | string): string {
   }).format(new Date(date));
 }
 
-export function formatCurrency(amount: number, currency = "BDT"): string {
-  return new Intl.NumberFormat("en-BD", {
+export function formatCurrency(amount: number, currency = "PKR"): string {
+  return new Intl.NumberFormat("en-PK", {
     style: "currency",
     currency,
     minimumFractionDigits: 0,

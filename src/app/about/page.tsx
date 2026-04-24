@@ -4,7 +4,7 @@ import { Users, Target, Globe } from "lucide-react";
 export const metadata: Metadata = {
   title: "About Us",
   description:
-    "Learn about ARTHO'S Humanitarian Society — our mission, vision, and the team behind our work in Bangladesh.",
+    "Learn about ARTHO'S Humanitarian Society — our mission, vision, and the team behind our work in Pakistan.",
 };
 
 export default function AboutPage() {
@@ -24,7 +24,7 @@ export default function AboutPage() {
           <p className="text-lg text-gray-600 leading-relaxed">
             ARTHO&apos;S Humanitarian Society is a non-governmental organization
             committed to fostering compassion, equity, and sustainable change across
-            Bangladesh. Founded with a vision to serve the underserved, we operate
+            Pakistan. Founded with a vision to serve the underserved, we operate
             through community-driven programs that touch lives in meaningful ways.
           </p>
         </div>
@@ -39,7 +39,7 @@ export default function AboutPage() {
             {
               icon: Globe,
               title: "Our Vision",
-              text: "A Bangladesh where every citizen has access to basic rights and dignity.",
+              text: "A Pakistan where every citizen has access to basic rights and dignity.",
             },
             {
               icon: Users,

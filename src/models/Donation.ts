@@ -19,7 +19,7 @@ const DonationSchema = new Schema<IDonation>(
     email: { type: String, required: true, trim: true, lowercase: true },
     phone: { type: String, required: true, trim: true },
     amount: { type: Number, required: true, min: 1 },
-    currency: { type: String, required: true, default: "BDT" },
+    currency: { type: String, required: true, default: "PKR" },
     purpose: {
       type: String,
       required: true,

@@ -22,7 +22,7 @@ export default function BlogPage() {
             Stories of Impact
           </h1>
           <p className="text-gray-500 max-w-xl mx-auto">
-            Inspiring stories, program updates, and insights from our work across Bangladesh.
+            Inspiring stories, program updates, and insights from our work across Pakistan.
           </p>
         </div>
 

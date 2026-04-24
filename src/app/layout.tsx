@@ -22,9 +22,9 @@ export const metadata: Metadata = {
     template: "%s | ARTHO'S",
   },
   description:
-    "ARTHO'S is a humanitarian society dedicated to making a positive impact through education, health, blood donation, book drives, and community service in Bangladesh.",
+    "ARTHO'S is a humanitarian society dedicated to making a positive impact through education, health, blood donation, book drives, and community service in Pakistan.",
   keywords: [
-    "NGO Bangladesh",
+    "NGO Pakistan",
     "humanitarian society",
     "volunteer",
     "blood donation",
@@ -34,17 +34,17 @@ export const metadata: Metadata = {
   authors: [{ name: "ARTHO'S Humanitarian Society" }],
   openGraph: {
     type: "website",
-    locale: "en_BD",
+    locale: "en_PK",
     siteName: "ARTHO'S Humanitarian Society",
     title: "ARTHO'S Humanitarian Society",
     description:
-      "Making a positive impact through education, health, and community service in Bangladesh.",
+      "Making a positive impact through education, health, and community service in Pakistan.",
   },
   twitter: {
     card: "summary_large_image",
     title: "ARTHO'S Humanitarian Society",
     description:
-      "Making a positive impact through education, health, and community service in Bangladesh.",
+      "Making a positive impact through education, health, and community service in Pakistan.",
   },
 };
 
