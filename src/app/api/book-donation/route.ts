@@ -11,7 +11,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   const body = await request.json();
 
-  const required = ["donorName", "email", "phone", "address", "bookTitle", "author", "subject", "condition"];
+  const required = ["donorName", "email", "phone", "address", "condition"];
   const missing = required.filter((k) => !body[k]);
 
   if (missing.length > 0) {

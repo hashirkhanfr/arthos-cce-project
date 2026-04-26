@@ -5,9 +5,6 @@ export interface IBookDonation extends Document {
   email: string;
   phone: string;
   address: string;
-  bookTitle: string;
-  author: string;
-  subject: string;
   condition: string;
   quantity: number;
   pickupRequired: boolean;
@@ -21,9 +18,6 @@ const BookDonationSchema = new Schema<IBookDonation>(
     email: { type: String, required: true, trim: true, lowercase: true },
     phone: { type: String, required: true, trim: true },
     address: { type: String, required: true, trim: true },
-    bookTitle: { type: String, required: true, trim: true },
-    author: { type: String, required: true, trim: true },
-    subject: { type: String, required: true, trim: true },
     condition: {
       type: String,
       required: true,

@@ -13,16 +13,14 @@ import {
 const footerLinks = {
   organization: [
     { label: "About Us", href: "/about" },
-    { label: "Founder's Note", href: "/founder-note" },
-    { label: "Our Impact", href: "/impact" },
     { label: "Gallery", href: "/gallery" },
     { label: "Blog", href: "/blog" },
   ],
   getInvolved: [
-    { label: "Volunteer", href: "/volunteer" },
-    { label: "Blood Donation", href: "/blood-donation" },
-    { label: "Book Donation", href: "/book-donation" },
-    { label: "Donate", href: "/donate" },
+    { label: "Volunteer With Us", href: "/volunteer" },
+    { label: "Donate Blood", href: "/blood-donation" },
+    { label: "Donate Books", href: "/book-donation" },
+    { label: "Fund Us", href: "/donate" },
   ],
 };
 

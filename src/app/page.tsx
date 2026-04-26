@@ -88,7 +88,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative flex flex-col justify-center overflow-hidden pt-28 pb-12 lg:pt-36 lg:pb-16 z-0">
+      <section className="relative min-h-[90vh] flex items-center overflow-hidden pt-28 pb-20 lg:pt-36 lg:pb-24 z-0">
         <div className="absolute inset-0 gradient-primary opacity-95 -z-10" />
         <div
           className="absolute inset-0 opacity-10 -z-10"
@@ -97,54 +97,59 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative container-arthos text-white z-10">
-          <div className="max-w-4xl mx-auto text-center flex flex-col items-center">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm text-sm font-medium mb-4 border border-white/20">
-              <Heart size={14} />
-              Serving Pakistan Since 2018
-            </span>
+        <div className="relative container-arthos text-white z-10 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
-            <h1
-              className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-tight mb-6"
-              style={{ fontFamily: "Outfit, sans-serif" }}
-            >
-              Together We Build a{" "}
-              <span className="text-[#E8D3A5]">Better Tomorrow</span>
-            </h1>
+            {/* Left Content: Hero Text */}
+            <div className="max-w-2xl text-left">
+              <span className="inline-flex items-center gap-2 px-4 sm:py-2 py-0 rounded-full bg-white/15 backdrop-blur-sm text-sm font-medium mb-6 border border-white/20">
+                <Heart size={14} />
+                Serving Pakistan Since 2018
+              </span>
 
-            <p className="text-lg sm:text-xl text-white/90 mb-8 max-w-3xl leading-relaxed">
-              <strong>ARTHO&apos;S</strong> stands for <strong>Always Ready To Help Others</strong>. It aims to help socially deprived people of Pakistan through education, health initiatives, blood donation drives, and compassionate volunteerism.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4 mb-16">
-              <Button href="/donate" size="lg" variant="secondary" className="px-8">
-                Donate Now
-              </Button>
-              <Button
-                href="/volunteer"
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-[#1F6F3D] px-8"
+              <h1
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight mb-6"
+                style={{ fontFamily: "Outfit, sans-serif" }}
               >
-                Become a Volunteer
-              </Button>
-            </div>
-          </div>
-        </div>
+                Together We Build a{" "}
+                <span className="text-[#E8D3A5]">Better Tomorrow</span>
+              </h1>
 
-        {/* Floating Stats */}
-        <div className="container-arthos relative z-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
-            {stats.map(({ label, value, icon: Icon }) => (
-              <div
-                key={label}
-                className="bg-white/10 backdrop-blur-md px-6 py-8 text-white text-center hover:bg-white/20 transition-all duration-300"
-              >
-                <Icon size={28} className="mx-auto mb-4 text-[#E8D3A5]" />
-                <div className="text-3xl lg:text-4xl font-bold text-white mb-2 tracking-tight" style={{ fontFamily: "Outfit, sans-serif" }}>{value}</div>
-                <div className="text-sm font-medium text-white/80 uppercase tracking-wider">{label}</div>
+              <p className="text-lg sm:text-xl text-white/90 mb-8 leading-relaxed">
+                <strong>ARTHO&apos;S</strong> stands for <strong>Always Ready To Help Others</strong>. It aims to help socially deprived people of Pakistan through education, health initiatives, blood donation drives, and compassionate volunteerism.
+              </p>
+
+              <div className="flex flex-wrap gap-4 mb-4 lg:mb-0">
+                <Button href="/donate" size="lg" variant="secondary" className="px-8">
+                  Fund Us
+                </Button>
+                <Button
+                  href="/volunteer"
+                  size="lg"
+                  variant="outline"
+                  className="border-white text-white hover:bg-white hover:text-[#1F6F3D] px-8"
+                >
+                  Become a Volunteer
+                </Button>
               </div>
-            ))}
+            </div>
+
+            {/* Right Content: Stats Grid */}
+            <div className="relative w-full">
+              <div className="grid grid-cols-2 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                {stats.map(({ label, value, icon: Icon }) => (
+                  <div
+                    key={label}
+                    className="bg-white/10 backdrop-blur-md px-6 py-8 text-white text-center hover:bg-white/20 transition-all duration-300"
+                  >
+                    <Icon size={28} className="mx-auto mb-4 text-[#E8D3A5]" />
+                    <div className="text-3xl lg:text-4xl font-bold text-white mb-2 tracking-tight" style={{ fontFamily: "Outfit, sans-serif" }}>{value}</div>
+                    <div className="text-sm font-medium text-white/80 uppercase tracking-wider">{label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>

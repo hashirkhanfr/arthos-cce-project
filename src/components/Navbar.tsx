@@ -5,24 +5,11 @@ import { useState } from "react";
 import { Menu, X, Heart, ChevronDown } from "lucide-react";
 
 const navLinks = [
-  {
-    label: "About",
-    href: "/about",
-    children: [
-      { label: "About Us", href: "/about" },
-      { label: "Founder's Note", href: "/founder-note" },
-      { label: "Our Impact", href: "/impact" },
-    ],
-  },
-  {
-    label: "Get Involved",
-    href: "#",
-    children: [
-      { label: "Volunteer", href: "/volunteer" },
-      { label: "Blood Donation", href: "/blood-donation" },
-      { label: "Book Donation", href: "/book-donation" },
-    ],
-  },
+  { label: "Home", href: "/" },
+  { label: "About Us", href: "/about" },
+  { label: "Volunteer With Us", href: "/volunteer" },
+  { label: "Donate Blood", href: "/blood-donation" },
+  { label: "Donate Books", href: "/book-donation" },
   { label: "Gallery", href: "/gallery" },
   { label: "Blog", href: "/blog" },
 ];
@@ -106,7 +93,7 @@ export default function Navbar() {
               href="/donate"
               className="px-5 py-2.5 bg-[#1F6F3D] text-white text-sm font-semibold rounded-full hover:bg-[#14532D] transition-colors shadow-sm"
             >
-              Donate Now
+              Fund Us
             </Link>
           </div>
 
@@ -174,7 +161,7 @@ export default function Navbar() {
                 className="block w-full text-center px-5 py-3 bg-[#1F6F3D] text-white text-sm font-semibold rounded-full hover:bg-[#14532D] transition-colors"
                 onClick={() => setMobileOpen(false)}
               >
-                Donate Now
+                Fund Us
               </Link>
             </div>
           </div>

@@ -10,9 +10,6 @@ interface FormState {
   email: string;
   phone: string;
   address: string;
-  bookTitle: string;
-  author: string;
-  subject: string;
   condition: string;
   quantity: string;
   pickupRequired: string;
@@ -24,9 +21,6 @@ const initialState: FormState = {
   email: "",
   phone: "",
   address: "",
-  bookTitle: "",
-  author: "",
-  subject: "",
   condition: "",
   quantity: "1",
   pickupRequired: "false",
@@ -137,17 +131,13 @@ export default function BookDonationPage() {
                   <FormInput id="address" name="address" label="Address" placeholder="City and district" value={form.address} onChange={handleChange} error={errors.address} required icon={MapPin} />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-6">
-                  <FormInput id="bookTitle" name="bookTitle" label="Book Title" placeholder="Name of the book" value={form.bookTitle} onChange={handleChange} error={errors.bookTitle} required icon={BookOpen} />
-                  <FormInput id="author" name="author" label="Author" placeholder="Author's name" value={form.author} onChange={handleChange} error={errors.author} required />
-                </div>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <FormInput id="subject" name="subject" label="Subject / Category" placeholder="e.g. Science, Fiction" value={form.subject} onChange={handleChange} error={errors.subject} required />
                   <FormInput id="quantity" name="quantity" label="Quantity" type="number" value={form.quantity} onChange={handleChange} min={1} />
-                </div>
-                <div className="grid sm:grid-cols-2 gap-6">
                   <FormInput id="condition" name="condition" label="Book Condition" type="select" value={form.condition} onChange={handleChange} error={errors.condition} required options={[{ value: "new", label: "New" }, { value: "good", label: "Good" }, { value: "fair", label: "Fair" }]} />
+                </div>
+                <div className="grid sm:grid-cols-1 gap-6">
                   <FormInput id="pickupRequired" name="pickupRequired" label="Need Pickup?" type="select" value={form.pickupRequired} onChange={handleChange} options={[{ value: "false", label: "No, I'll drop it off" }, { value: "true", label: "Yes, please arrange pickup" }]} />
                 </div>
+
                 <FormInput id="message" name="message" label="Additional Notes (optional)" type="textarea" placeholder="Any special instructions or notes..." value={form.message} onChange={handleChange} rows={3} />
 
                 {status === "error" && message && (
