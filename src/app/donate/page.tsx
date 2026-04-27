@@ -76,55 +76,56 @@ export default function DonatePage() {
   return (
     <div className="section-padding bg-gray-50/50">
       <div className="container-arthos">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+        <div className="grid lg:grid-cols-2 shadow-2xl rounded-3xl overflow-hidden border border-gray-100">
           
-          {/* Left Side: Information */}
-          <div className="sticky top-32">
-            <span className="inline-block text-sm font-semibold text-[#C9A86A] uppercase tracking-widest mb-3">
-              Donate
+          {/* Right Side: Information (Primary Background) */}
+          <div className="bg-[#1F6F3D] text-[#E8D3A5] p-8 sm:p-12 lg:p-16 order-1 lg:order-2 flex flex-col justify-center">
+            <span className="inline-block text-sm font-semibold text-[#E8D3A5] uppercase tracking-widest mb-3 opacity-90">
+              Fund Us
             </span>
             <h1
-              className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6"
+              className="text-4xl lg:text-5xl font-bold text-white mb-6"
               style={{ fontFamily: "Outfit, sans-serif" }}
             >
               Make a Meaningful Donation
             </h1>
-            <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+            <p className="text-lg text-[#E8D3A5]/90 mb-10 leading-relaxed">
               Your contribution directly funds life-changing programs. Every rupee counts. Join us in building a stronger, healthier, and more educated Pakistan through your generous support.
             </p>
             
-            <div className="space-y-6 mb-10 lg:mb-0">
+            <div className="space-y-8">
               {[
                 { title: "Transparent Impact", desc: "100% of your donation directly supports our on-ground community programs." },
                 { title: "Tax Deductible", desc: "All donations to ARTHO'S are eligible for tax deductions under government regulations." },
                 { title: "Regular Updates", desc: "We'll keep you informed about exactly how your contribution is making a difference." }
               ].map((item, i) => (
-                <div key={i} className="flex gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#C9A86A]/10 flex items-center justify-center shrink-0">
-                    <Heart size={20} className="text-[#C9A86A]" />
+                <div key={i} className="flex gap-5">
+                  <div className="w-12 h-12 rounded-full bg-[#E8D3A5]/10 flex items-center justify-center shrink-0">
+                    <Heart size={20} className="text-[#E8D3A5]" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-gray-900 text-lg mb-1">{item.title}</h3>
-                    <p className="text-sm text-gray-500 leading-relaxed">{item.desc}</p>
+                    <h3 className="font-bold text-white text-lg mb-1">{item.title}</h3>
+                    <p className="text-sm text-[#E8D3A5]/80 leading-relaxed">{item.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right Side: Form */}
-          <div>
+          {/* Left Side: Form (Beige Background) */}
+          <div className="bg-[#E8D3A5] p-8 sm:p-12 lg:p-16 order-2 lg:order-1 flex flex-col justify-center">
             {status === "success" ? (
-              <div className="p-10 rounded-3xl bg-white border border-[#1F6F3D]/20 shadow-xl shadow-[#1F6F3D]/5 text-center">
+              <div className="text-center">
                 <div className="w-20 h-20 rounded-full bg-[#1F6F3D]/10 flex items-center justify-center mx-auto mb-6">
                   <Heart size={32} className="text-[#1F6F3D] fill-current" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-3" style={{ fontFamily: "Outfit, sans-serif" }}>Thank You!</h2>
-                <p className="text-gray-500 mb-8">{message}</p>
-                <Button variant="outline" size="lg" onClick={() => setStatus("idle")}>Donate Again</Button>
+                <h2 className="text-2xl font-bold text-[#1F6F3D] mb-3" style={{ fontFamily: "Outfit, sans-serif" }}>Thank You!</h2>
+                <p className="text-[#1F6F3D]/80 mb-8">{message}</p>
+                <Button variant="primary" size="lg" onClick={() => setStatus("idle")}>Donate Again</Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="bg-white rounded-3xl border border-gray-100 shadow-xl shadow-gray-200/50 p-8 sm:p-10 space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <h2 className="text-3xl font-bold text-[#1F6F3D] mb-8" style={{ fontFamily: "Outfit, sans-serif" }}>Donation Details</h2>
                 {/* Quick amount selection */}
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-3">
