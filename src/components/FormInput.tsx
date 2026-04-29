@@ -40,14 +40,14 @@ export default function FormInput({
   max,
 }: FormInputProps) {
   const inputBase =
-    "w-full px-4 py-3 rounded-xl border text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1F6F3D]/30 focus:border-[#1F6F3D] transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-400";
+    "w-full px-4 py-2.5 rounded-md border text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#1F6F3D]/30 focus:border-[#1F6F3D] transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-400";
 
   const inputClass = `${inputBase} ${
     error ? "border-red-400 bg-red-50/30" : "border-gray-200 bg-white"
   } ${Icon ? "pl-10" : ""}`;
 
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1">
       <label
         htmlFor={id}
         className="text-sm font-medium text-gray-700"

@@ -71,84 +71,87 @@ export default function BookDonationPage() {
   }
 
   return (
-    <div className="section-padding bg-gray-50/50">
-      <div className="container-arthos">
-        <div className="grid lg:grid-cols-2 shadow-2xl rounded-3xl overflow-hidden border border-gray-100">
-          
-          {/* Right Side: Information (Primary Background) */}
-          <div className="bg-[#1F6F3D] text-[#E8D3A5] p-8 sm:p-12 lg:p-16 order-1 lg:order-2 flex flex-col justify-center">
-            <span className="inline-block text-sm font-semibold text-[#E8D3A5] uppercase tracking-widest mb-3 opacity-90">
-              Book Donation
-            </span>
-            <h1
-              className="text-4xl lg:text-5xl font-bold text-white mb-6"
-              style={{ fontFamily: "Outfit, sans-serif" }}
-            >
-              Donate Books, Empower Minds
-            </h1>
-            <p className="text-lg text-[#E8D3A5]/90 mb-10 leading-relaxed">
-              Share the gift of knowledge. Your books will find a new home where they&apos;ll make the greatest difference. Help us build libraries and provide educational resources to underprivileged communities across Pakistan.
-            </p>
-            
-            <div className="space-y-8">
-              {[
-                { title: "Empower Students", desc: "Your books provide crucial learning materials for children who cannot afford them." },
-                { title: "Promote Literacy", desc: "Contribute directly to raising the literacy rate and fostering a culture of reading." },
-                { title: "Environmental Impact", desc: "Recycle and reuse books, promoting sustainability and reducing waste." }
-              ].map((item, i) => (
-                <div key={i} className="flex gap-5">
-                  <div className="w-12 h-12 rounded-full bg-[#E8D3A5]/10 flex items-center justify-center shrink-0">
-                    <BookOpen size={20} className="text-[#E8D3A5]" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-white text-lg mb-1">{item.title}</h3>
-                    <p className="text-sm text-[#E8D3A5]/80 leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Left Side: Form (Beige Background) */}
-          <div className="bg-[#E8D3A5] p-8 sm:p-12 lg:p-16 order-2 lg:order-1 flex flex-col justify-center">
-            {status === "success" ? (
-              <div className="text-center">
-                <div className="w-20 h-20 rounded-full bg-[#1F6F3D]/10 flex items-center justify-center mx-auto mb-6">
-                  <BookOpen size={32} className="text-[#1F6F3D]" />
-                </div>
-                <h2 className="text-2xl font-bold text-[#1F6F3D] mb-3" style={{ fontFamily: "Outfit, sans-serif" }}>Donation Submitted!</h2>
-                <p className="text-[#1F6F3D]/80 mb-8">{message}</p>
-                <Button variant="primary" size="lg" onClick={() => setStatus("idle")}>Submit Another</Button>
+    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-80px)]">
+      
+      {/* Left Side: Form (Beige Background with Texture) */}
+      <div className="w-full lg:w-1/2 bg-[#E8D3A5] relative order-2 lg:order-1 flex items-start lg:justify-end p-8 sm:p-12 lg:p-16 xl:p-24">
+        {/* Subtle Noise Texture - Increased visibility */}
+        <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-noise" />
+        
+        <div className="w-full max-w-xl relative z-10">
+          {status === "success" ? (
+            <div className="text-center">
+              <div className="w-20 h-20 rounded-full bg-[#1F6F3D]/10 flex items-center justify-center mx-auto mb-6">
+                <BookOpen size={32} className="text-[#1F6F3D]" />
               </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <h2 className="text-3xl font-bold text-[#1F6F3D] mb-8" style={{ fontFamily: "Outfit, sans-serif" }}>Donation Form</h2>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <FormInput id="donorName" name="donorName" label="Your Name" placeholder="Full name" value={form.donorName} onChange={handleChange} error={errors.donorName} required icon={User} />
-                  <FormInput id="email" name="email" label="Email Address" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} required icon={Mail} />
-                </div>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <FormInput id="phone" name="phone" label="Phone Number" type="tel" placeholder="+92 3XX-XXXXXXX" value={form.phone} onChange={handleChange} error={errors.phone} required icon={Phone} />
-                  <FormInput id="address" name="address" label="Address" placeholder="City and district" value={form.address} onChange={handleChange} error={errors.address} required icon={MapPin} />
-                </div>
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <FormInput id="quantity" name="quantity" label="Quantity" type="number" value={form.quantity} onChange={handleChange} min={1} />
-                  <FormInput id="condition" name="condition" label="Book Condition" type="select" value={form.condition} onChange={handleChange} error={errors.condition} required options={[{ value: "new", label: "New" }, { value: "good", label: "Good" }, { value: "fair", label: "Fair" }]} />
-                </div>
-                <div className="grid sm:grid-cols-1 gap-6">
-                  <FormInput id="pickupRequired" name="pickupRequired" label="Need Pickup?" type="select" value={form.pickupRequired} onChange={handleChange} options={[{ value: "false", label: "No, I'll drop it off" }, { value: "true", label: "Yes, please arrange pickup" }]} />
-                </div>
+              <h2 className="text-2xl font-bold text-[#1F6F3D] mb-3" style={{ fontFamily: "Outfit, sans-serif" }}>Donation Submitted!</h2>
+              <p className="text-[#1F6F3D]/80 mb-8">{message}</p>
+              <Button variant="primary" size="lg" onClick={() => setStatus("idle")}>Submit Another</Button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <h2 className="text-3xl font-bold text-[#1F6F3D] mb-6" style={{ fontFamily: "Outfit, sans-serif" }}>Donation Form</h2>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <FormInput id="donorName" name="donorName" label="Your Name" placeholder="Full name" value={form.donorName} onChange={handleChange} error={errors.donorName} required icon={User} />
+                <FormInput id="email" name="email" label="Email Address" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} required icon={Mail} />
+              </div>
+              <div className="grid sm:grid-cols-2 gap-6">
+                <FormInput id="phone" name="phone" label="Phone Number" type="tel" placeholder="+92 3XX-XXXXXXX" value={form.phone} onChange={handleChange} error={errors.phone} required icon={Phone} />
+                <FormInput id="address" name="address" label="Address" placeholder="City and district" value={form.address} onChange={handleChange} error={errors.address} required icon={MapPin} />
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <FormInput id="quantity" name="quantity" label="Quantity" type="number" value={form.quantity} onChange={handleChange} min={1} />
+                <FormInput id="condition" name="condition" label="Book Condition" type="select" value={form.condition} onChange={handleChange} error={errors.condition} required options={[{ value: "new", label: "New" }, { value: "good", label: "Good" }, { value: "fair", label: "Fair" }]} />
+              </div>
+              <div className="grid sm:grid-cols-1 gap-6">
+                <FormInput id="pickupRequired" name="pickupRequired" label="Need Pickup?" type="select" value={form.pickupRequired} onChange={handleChange} options={[{ value: "false", label: "No, I'll drop it off" }, { value: "true", label: "Yes, please arrange pickup" }]} />
+              </div>
 
-                <FormInput id="message" name="message" label="Additional Notes (optional)" type="textarea" placeholder="Any special instructions or notes..." value={form.message} onChange={handleChange} rows={3} />
+              <FormInput id="message" name="message" label="Additional Notes (optional)" type="textarea" placeholder="Any special instructions or notes..." value={form.message} onChange={handleChange} rows={3} />
 
-                {status === "error" && message && (
-                  <p className="text-sm text-red-500 bg-red-50 px-4 py-3 rounded-xl">{message}</p>
-                )}
-                <Button type="submit" fullWidth size="lg" disabled={status === "loading"} icon={Send} iconPosition="right" className="mt-4">
-                  {status === "loading" ? "Submitting..." : "Submit Donation"}
-                </Button>
-              </form>
-            )}
+              {status === "error" && message && (
+                <p className="text-sm text-red-500 bg-red-50 px-4 py-3 rounded-xl">{message}</p>
+              )}
+              <Button type="submit" fullWidth size="lg" disabled={status === "loading"} icon={Send} iconPosition="right" className="mt-4">
+                {status === "loading" ? "Submitting..." : "Submit Donation"}
+              </Button>
+            </form>
+          )}
+        </div>
+      </div>
+
+      {/* Right Side: Information (Primary Background) */}
+      <div className="w-full lg:w-1/2 bg-[#1F6F3D] order-1 lg:order-2 flex items-start lg:justify-start p-8 sm:p-12 lg:p-16 xl:p-24">
+        <div className="w-full max-w-xl">
+          <span className="inline-block text-sm font-semibold text-[#E8D3A5] uppercase tracking-widest mb-3 opacity-90">
+            Book Donation
+          </span>
+          <h1
+            className="text-4xl lg:text-5xl font-bold text-white mb-6"
+            style={{ fontFamily: "Outfit, sans-serif" }}
+          >
+            Donate Books, Empower Minds
+          </h1>
+          <p className="text-lg text-[#E8D3A5]/90 mb-10 leading-relaxed">
+            Share the gift of knowledge. Your books will find a new home where they&apos;ll make the greatest difference. Help us build libraries and provide educational resources to underprivileged communities across Pakistan.
+          </p>
+          
+          <div className="space-y-8">
+            {[
+              { title: "Empower Students", desc: "Your books provide crucial learning materials for children who cannot afford them." },
+              { title: "Promote Literacy", desc: "Contribute directly to raising the literacy rate and fostering a culture of reading." },
+              { title: "Environmental Impact", desc: "Recycle and reuse books, promoting sustainability and reducing waste." }
+            ].map((item, i) => (
+              <div key={i} className="flex gap-5">
+                <div className="w-12 h-12 rounded-full bg-[#E8D3A5]/10 flex items-center justify-center shrink-0">
+                  <BookOpen size={20} className="text-[#E8D3A5]" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-white text-lg mb-1">{item.title}</h3>
+                  <p className="text-sm text-[#E8D3A5]/80 leading-relaxed">{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

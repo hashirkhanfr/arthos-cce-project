@@ -9,7 +9,7 @@ import Button from "@/components/Button";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -26,18 +26,18 @@ export default function AdminLoginPage() {
     setError("");
 
     const result = await signIn("credentials", {
-      email: form.email,
+      username: form.username,
       password: form.password,
       redirect: false,
     });
 
     if (result?.error) {
-      setError("Invalid email or password.");
+      setError("Invalid username or password.");
       setLoading(false);
       return;
     }
 
-    router.push("/admin/dashboard");
+    router.push("/admin");
   }
 
   return (
@@ -61,15 +61,15 @@ export default function AdminLoginPage() {
           className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8 space-y-5"
         >
           <FormInput
-            id="email"
-            name="email"
-            label="Email Address"
-            type="email"
-            placeholder="admin@arthos.org"
-            value={form.email}
+            id="username"
+            name="username"
+            label="Username"
+            type="text"
+            placeholder="admin"
+            value={form.username}
             onChange={handleChange}
             required
-            icon={Mail}
+            icon={LogIn}
           />
           <FormInput
             id="password"

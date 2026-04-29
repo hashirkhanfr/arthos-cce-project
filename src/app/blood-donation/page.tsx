@@ -82,15 +82,14 @@ export default function BloodDonationPage() {
   }
 
   return (
-    <div className="section-padding bg-gray-50/50">
-      <div className="container-arthos">
-        <div className="grid lg:grid-cols-2 shadow-2xl rounded-3xl overflow-hidden border border-gray-100">
-          
-          {/* Right Side: Information (Primary Background) */}
-          <div className="bg-[#1F6F3D] text-[#E8D3A5] p-8 sm:p-12 lg:p-16 order-1 lg:order-2 flex flex-col justify-center">
-            <span className="inline-block text-sm font-semibold text-[#E8D3A5] uppercase tracking-widest mb-3 opacity-90">
-              Blood Donation
-            </span>
+    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-80px)]">
+      
+      {/* Right Side: Information (Primary Background) */}
+      <div className="w-full lg:w-1/2 bg-[#1F6F3D] order-1 lg:order-2 flex items-start lg:justify-start p-8 sm:p-12 lg:p-16 xl:p-24">
+        <div className="w-full max-w-xl">
+          <span className="inline-block text-sm font-semibold text-[#E8D3A5] uppercase tracking-widest mb-3 opacity-90">
+            Blood Donation
+          </span>
             <h1
               className="text-4xl lg:text-5xl font-bold text-white mb-6"
               style={{ fontFamily: "Outfit, sans-serif" }}
@@ -119,9 +118,14 @@ export default function BloodDonationPage() {
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Left Side: Form (Beige Background) */}
-          <div className="bg-[#E8D3A5] p-8 sm:p-12 lg:p-16 order-2 lg:order-1 flex flex-col justify-center">
+
+      {/* Left Side: Form (Beige Background with Texture) */}
+      <div className="w-full lg:w-1/2 bg-[#E8D3A5] relative order-2 lg:order-1 flex items-start lg:justify-end p-8 sm:p-12 lg:p-16 xl:p-24">
+        {/* Subtle Noise Texture - Increased visibility */}
+        <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-noise" />
+        <div className="w-full max-w-xl relative z-10">
             {status === "success" ? (
               <div className="text-center">
                 <div className="w-20 h-20 rounded-full bg-[#1F6F3D]/10 flex items-center justify-center mx-auto mb-6">
@@ -136,10 +140,10 @@ export default function BloodDonationPage() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="space-y-6"
+                className="space-y-4"
               >
-                <h2 className="text-3xl font-bold text-[#1F6F3D] mb-8" style={{ fontFamily: "Outfit, sans-serif" }}>Registration Form</h2>
-                <div className="grid sm:grid-cols-2 gap-6">
+                <h2 className="text-3xl font-bold text-[#1F6F3D] mb-6" style={{ fontFamily: "Outfit, sans-serif" }}>Registration Form</h2>
+                <div className="grid sm:grid-cols-2 gap-4">
                   <FormInput id="name" name="name" label="Full Name" placeholder="Your full name" value={form.name} onChange={handleChange} error={errors.name} required icon={User} />
                   <FormInput id="email" name="email" label="Email Address" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} required icon={Mail} />
                 </div>
@@ -166,6 +170,5 @@ export default function BloodDonationPage() {
           </div>
         </div>
       </div>
-    </div>
   );
 }

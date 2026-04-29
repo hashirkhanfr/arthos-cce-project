@@ -32,7 +32,7 @@ const variantStyles: Record<ButtonVariant, string> = {
 const sizeStyles: Record<ButtonSize, string> = {
   sm: "px-4 py-2 text-sm",
   md: "px-6 py-2.5 text-sm",
-  lg: "px-8 py-3.5 text-base",
+  lg: "px-8 py-3 text-base",
 };
 
 export default function Button({
@@ -49,7 +49,7 @@ export default function Button({
   className = "",
 }: ButtonProps) {
   const base =
-    "inline-flex items-center justify-center gap-2 font-semibold rounded-full transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1F6F3D] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
+    "inline-flex items-center justify-center gap-2 font-semibold rounded-md transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1F6F3D] focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none";
 
   const classes = [
     base,

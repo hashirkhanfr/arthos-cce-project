@@ -74,15 +74,19 @@ export default function DonatePage() {
   }
 
   return (
-    <div className="section-padding bg-gray-50/50">
-      <div className="container-arthos">
-        <div className="grid lg:grid-cols-2 shadow-2xl rounded-3xl overflow-hidden border border-gray-100">
-          
-          {/* Right Side: Information (Primary Background) */}
-          <div className="bg-[#1F6F3D] text-[#E8D3A5] p-8 sm:p-12 lg:p-16 order-1 lg:order-2 flex flex-col justify-center">
-            <span className="inline-block text-sm font-semibold text-[#E8D3A5] uppercase tracking-widest mb-3 opacity-90">
-              Fund Us
-            </span>
+    <div className="flex flex-col lg:flex-row min-h-[calc(100vh-80px)]">
+      
+      {/* Right Side: Information (Primary Background) */}
+      <div className="w-full lg:w-1/2 relative order-1 lg:order-2 flex items-start lg:justify-start p-8 sm:p-12 lg:p-16 xl:p-24 overflow-hidden">
+        <div className="absolute inset-0 bg-[#1F6F3D]/90 z-0" />
+        <div 
+          className="absolute inset-0 bg-cover bg-center -z-10"
+          style={{ backgroundImage: `url('/images/solar installment/529795874_18496602295067653_8819664083452530924_n.jpg')` }}
+        />
+        <div className="w-full max-w-xl relative z-10 text-white">
+          <span className="inline-block text-sm font-semibold text-[#E8D3A5] uppercase tracking-widest mb-3 opacity-90">
+            Fund Us
+          </span>
             <h1
               className="text-4xl lg:text-5xl font-bold text-white mb-6"
               style={{ fontFamily: "Outfit, sans-serif" }}
@@ -96,7 +100,7 @@ export default function DonatePage() {
             <div className="space-y-8">
               {[
                 { title: "Transparent Impact", desc: "100% of your donation directly supports our on-ground community programs." },
-                { title: "Tax Deductible", desc: "All donations to ARTHO'S are eligible for tax deductions under government regulations." },
+                { title: "Tax Deductible", desc: "All donations to ARTHO&apos;S are eligible for tax deductions under government regulations." },
                 { title: "Regular Updates", desc: "We'll keep you informed about exactly how your contribution is making a difference." }
               ].map((item, i) => (
                 <div key={i} className="flex gap-5">
@@ -111,9 +115,14 @@ export default function DonatePage() {
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Left Side: Form (Beige Background) */}
-          <div className="bg-[#E8D3A5] p-8 sm:p-12 lg:p-16 order-2 lg:order-1 flex flex-col justify-center">
+
+      {/* Left Side: Form (Beige Background with Texture) */}
+      <div className="w-full lg:w-1/2 bg-[#E8D3A5] relative order-2 lg:order-1 flex items-start lg:justify-end p-8 sm:p-12 lg:p-16 xl:p-24">
+        {/* Subtle Noise Texture - Increased visibility */}
+        <div className="absolute inset-0 opacity-[0.08] pointer-events-none bg-noise" />
+        <div className="w-full max-w-xl relative z-10">
             {status === "success" ? (
               <div className="text-center">
                 <div className="w-20 h-20 rounded-full bg-[#1F6F3D]/10 flex items-center justify-center mx-auto mb-6">
@@ -124,8 +133,8 @@ export default function DonatePage() {
                 <Button variant="primary" size="lg" onClick={() => setStatus("idle")}>Donate Again</Button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <h2 className="text-3xl font-bold text-[#1F6F3D] mb-8" style={{ fontFamily: "Outfit, sans-serif" }}>Donation Details</h2>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <h2 className="text-3xl font-bold text-[#1F6F3D] mb-6" style={{ fontFamily: "Outfit, sans-serif" }}>Donation Details</h2>
                 {/* Quick amount selection */}
                 <div>
                   <label className="text-sm font-medium text-gray-700 block mb-3">
@@ -152,7 +161,7 @@ export default function DonatePage() {
 
                 <FormInput id="purpose" name="purpose" label="Donation Purpose" type="select" value={form.purpose} onChange={handleChange} error={errors.purpose} required options={purposeOptions} icon={Heart} />
 
-                <div className="grid sm:grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-2 gap-4">
                   <FormInput id="donorName" name="donorName" label="Your Name" placeholder="Full name" value={form.donorName} onChange={handleChange} error={errors.donorName} required icon={User} />
                   <FormInput id="email" name="email" label="Email Address" type="email" placeholder="you@example.com" value={form.email} onChange={handleChange} error={errors.email} required icon={Mail} />
                 </div>
@@ -171,6 +180,5 @@ export default function DonatePage() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
