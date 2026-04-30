@@ -9,6 +9,7 @@ export interface IBloodDonor extends Document {
   address: string;
   lastDonationDate?: Date;
   medicalConditions?: string;
+  status: string;
   createdAt: Date;
 }
 
@@ -26,6 +27,11 @@ const BloodDonorSchema = new Schema<IBloodDonor>(
     address: { type: String, required: true, trim: true },
     lastDonationDate: { type: Date },
     medicalConditions: { type: String, trim: true },
+    status: {
+      type: String,
+      default: "unread",
+      enum: ["unread", "read"],
+    },
   },
   { timestamps: true }
 );

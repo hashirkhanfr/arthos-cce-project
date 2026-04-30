@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, X, Heart, ChevronDown } from "lucide-react";
 
 const navLinks = [
@@ -17,9 +18,14 @@ const navLinks = [
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const pathname = usePathname();
 
   function toggleDropdown(label: string) {
     setOpenDropdown((prev) => (prev === label ? null : label));
+  }
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
   }
 
   return (

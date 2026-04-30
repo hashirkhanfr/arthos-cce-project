@@ -9,6 +9,7 @@ export interface IVolunteer extends Document {
   occupation: string;
   motivation: string;
   availability: string;
+  status: string;
   createdAt: Date;
 }
 
@@ -25,6 +26,11 @@ const VolunteerSchema = new Schema<IVolunteer>(
       type: String,
       required: true,
       enum: ["weekdays", "weekends", "both"],
+    },
+    status: {
+      type: String,
+      default: "unread",
+      enum: ["unread", "read"],
     },
   },
   { timestamps: true }

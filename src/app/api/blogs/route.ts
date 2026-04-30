@@ -5,11 +5,17 @@ import { auth } from "@/lib/auth";
 import { slugify } from "@/utils/helpers";
 
 export async function GET() {
+  const session = await auth();
   await connectDB();
-  const blogs = await Blog.find({ published: true })
-    .sort({ publishedAt: -1 })
-    .select("-content")
+  
+  const query = session ? {} : { published: true };
+  const selection = session ? "" : "-content";
+  
+  const blogs = await Blog.find(query)
+    .sort({ createdAt: -1 })
+    .select(selection)
     .lean();
+    
   return NextResponse.json(blogs);
 }
 

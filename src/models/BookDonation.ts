@@ -9,6 +9,7 @@ export interface IBookDonation extends Document {
   quantity: number;
   pickupRequired: boolean;
   message?: string;
+  status: string;
   createdAt: Date;
 }
 
@@ -26,6 +27,11 @@ const BookDonationSchema = new Schema<IBookDonation>(
     quantity: { type: Number, required: true, min: 1 },
     pickupRequired: { type: Boolean, required: true, default: false },
     message: { type: String, trim: true },
+    status: {
+      type: String,
+      default: "unread",
+      enum: ["unread", "read"],
+    },
   },
   { timestamps: true }
 );

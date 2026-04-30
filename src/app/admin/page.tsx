@@ -7,7 +7,6 @@ import {
   BookOpen,
   Image as ImageIcon,
   BarChart3,
-  ClipboardList,
   Heart,
   Droplets,
 } from "lucide-react";
@@ -20,8 +19,9 @@ export const metadata: Metadata = {
 const adminLinks = [
   { href: "/admin/blogs", label: "Manage Blogs", icon: BookOpen, color: "#1F6F3D" },
   { href: "/admin/gallery", label: "Manage Gallery", icon: ImageIcon, color: "#C9A86A" },
-  { href: "/admin/stats", label: "Manage Stats", icon: BarChart3, color: "#0891B2" },
-  { href: "/admin/registrations", label: "View Registrations", icon: ClipboardList, color: "#7C3AED" },
+  { href: "/admin/volunteers", label: "Volunteers", icon: Users, color: "#7C3AED" },
+  { href: "/admin/blood-donors", label: "Blood Donors", icon: Droplets, color: "#EF4444" },
+  { href: "/admin/book-donations", label: "Book Donations", icon: BookOpen, color: "#3B82F6" },
 ];
 
 export default async function DashboardPage() {
@@ -30,24 +30,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#1F6F3D] text-white">
-            <Heart size={15} />
-          </span>
-          <span className="font-bold text-gray-900" style={{ fontFamily: "Outfit, sans-serif" }}>
-            ARTHO&apos;S Admin
-          </span>
-        </div>
-        <form action="/api/auth/signout" method="POST">
-          <button
-            type="submit"
-            className="text-sm text-gray-500 hover:text-gray-800 transition-colors"
-          >
-            Sign Out
-          </button>
-        </form>
-      </div>
+
 
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="mb-10">
