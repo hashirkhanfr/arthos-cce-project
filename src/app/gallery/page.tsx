@@ -1,37 +1,39 @@
-import type { Metadata } from "next";
-import { Image as ImageIcon } from "lucide-react";
+import { connectDB } from "@/lib/mongodb";
+import GalleryCollection from "@/models/GalleryCollection";
+import { motion } from "framer-motion";
+import GalleryClient from "@/components/gallery/GalleryClient";
 
-export const metadata: Metadata = {
-  title: "Gallery",
-  description:
-    "Explore photos from ARTHO'S events, volunteer programs, and community initiatives.",
+export const metadata = {
+  title: "Our Impact Gallery | ARTHO'S",
+  description: "Visual stories of change and hope across Pakistan. Explore our recent activities and relief missions.",
 };
 
-export default function GalleryPage() {
+export default async function GalleryPage() {
+  await connectDB();
+  
+  const collections = await GalleryCollection.find({ status: 'published' })
+    .sort({ createdAt: -1 })
+    .lean();
+
   return (
-    <div className="section-padding">
-      <div className="container-arthos">
-        <div className="text-center mb-14">
-          <span className="inline-block text-sm font-semibold text-[#1F6F3D] uppercase tracking-widest mb-3">
-            Gallery
-          </span>
-          <h1
-            className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4"
-            style={{ fontFamily: "Outfit, sans-serif" }}
-          >
-            Moments That Matter
-          </h1>
-          <p className="text-gray-500 max-w-xl mx-auto">
-            Browse through the highlights of our events, campaigns, and community stories.
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <section className="relative pt-32 pb-20 bg-gradient-to-br from-[#1F6F3D] to-[#14532D] text-white overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/bg-noise.png')] opacity-10"></div>
+        <div className="container-arthos relative z-10">
+          <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tight">Our Impact in <span className="text-white underline decoration-[#E8D3A5] underline-offset-8">Photos</span></h1>
+          <p className="text-xl text-green-50/80 max-w-2xl leading-relaxed">
+            Witness the transformations and stories of hope through our lens. Every picture represents a life touched and a community strengthened.
           </p>
         </div>
+      </section>
 
-        <div className="flex flex-col items-center justify-center py-24 text-center text-gray-400">
-          <ImageIcon size={48} className="mb-4 text-gray-200" />
-          <p className="font-medium text-gray-500">Gallery coming soon</p>
-          <p className="text-sm mt-1">Photos will appear here once uploaded via the admin panel.</p>
+      {/* Gallery Grid */}
+      <section className="py-20">
+        <div className="container-arthos">
+          <GalleryClient collections={JSON.parse(JSON.stringify(collections))} />
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
@@ -50,6 +50,13 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Start
     });
 
     const fileInputRef = useRef(null);
+
+    // Sync editor content when prop changes (for edit mode fetching)
+    useEffect(() => {
+        if (editor && content !== editor.getHTML()) {
+            editor.commands.setContent(content);
+        }
+    }, [content, editor]);
 
     if (!editor) {
         return null;

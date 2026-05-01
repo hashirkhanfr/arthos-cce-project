@@ -7,7 +7,7 @@ cloudinary.config({
   secure: true,
 });
 
-export { cloudinary };
+export default cloudinary;
 
 export async function uploadToCloudinary(
   fileBuffer: Buffer,

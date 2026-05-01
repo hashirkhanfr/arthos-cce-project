@@ -1,54 +1,42 @@
-import { NextRequest, NextResponse } from "next/server";
-import { connectDB } from "@/lib/mongodb";
-import Gallery from "@/models/Gallery";
-import { auth } from "@/lib/auth";
-import { uploadToCloudinary, deleteFromCloudinary } from "@/lib/cloudinary";
+import { NextResponse } from 'next/server';
+import { connectDB } from '@/lib/mongodb';
+import GalleryCollection from '@/models/GalleryCollection';
+import { auth } from '@/lib/auth';
 
 export async function GET() {
-  await connectDB();
-  const images = await Gallery.find().sort({ createdAt: -1 }).lean();
-  return NextResponse.json(images);
+    try {
+        await connectDB();
+        const collections = await GalleryCollection.find().sort({ createdAt: -1 });
+        return NextResponse.json({ success: true, data: collections });
+    } catch (error) {
+        return NextResponse.json({ success: false, error: 'Failed to fetch gallery' }, { status: 500 });
+    }
 }
 
-export async function POST(request: NextRequest) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  }
+export async function POST(request) {
+    try {
+        const session = await auth();
+        if (!session) {
+            return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+        }
 
-  const formData = await request.formData();
-  const file = formData.get("file") as File | null;
-  const title = formData.get("title") as string;
-  const category = formData.get("category") as string;
-  const description = formData.get("description") as string | null;
+        await connectDB();
+        const body = await request.json();
+        const { title, description, images, status } = body;
 
-  if (!file || !title || !category) {
-    return NextResponse.json({ message: "File, title, and category are required" }, { status: 400 });
-  }
+        if (!title || !images || images.length === 0) {
+            return NextResponse.json({ success: false, error: 'Title and images are required' }, { status: 400 });
+        }
 
-  const buffer = Buffer.from(await file.arrayBuffer());
-  const { url, publicId } = await uploadToCloudinary(buffer, "arthos/gallery");
+        const collection = await GalleryCollection.create({
+            title,
+            description,
+            images,
+            status: status || 'published'
+        });
 
-  await connectDB();
-  const image = await Gallery.create({ title, description, imageUrl: url, publicId, category });
-
-  return NextResponse.json({ message: "Image uploaded", id: image._id }, { status: 201 });
-}
-
-export async function DELETE(request: NextRequest) {
-  const session = await auth();
-  if (!session) {
-    return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
-  }
-
-  const { publicId, id } = await request.json();
-  if (!publicId || !id) {
-    return NextResponse.json({ message: "publicId and id are required" }, { status: 400 });
-  }
-
-  await deleteFromCloudinary(publicId);
-  await connectDB();
-  await Gallery.findByIdAndDelete(id);
-
-  return NextResponse.json({ message: "Image deleted" });
+        return NextResponse.json({ success: true, data: collection }, { status: 201 });
+    } catch (error) {
+        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+    }
 }
