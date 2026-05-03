@@ -30,7 +30,7 @@ export default async function BlogPostPage({ params }: Props) {
   await connectDB();
   
   const blog = await Blog.findOne({ slug, status: 'published' })
-    .populate('author', 'name')
+    .populate('author', 'username')
     .lean();
 
   if (!blog) notFound();

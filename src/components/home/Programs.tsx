@@ -18,6 +18,7 @@ const programs = [
     icon: Droplets,
     href: "/blood-donation",
     badge: "Save Lives",
+    image: "/images/blooddonation.png",
   },
   {
     title: "Book Donation Campaign",
@@ -26,6 +27,7 @@ const programs = [
     icon: BookOpen,
     href: "/book-donation",
     badge: "Empower Youth",
+    image: "/images/bookdonation.png",
   },
   {
     title: "Financial Donations",
@@ -58,7 +60,7 @@ export default function Programs() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {programs.map((program) => (
             <Card
               key={program.title}
@@ -68,6 +70,7 @@ export default function Programs() {
               badge={program.badge}
               href={program.href}
               image={program.image}
+              className="h-full"
             />
           ))}
         </div>

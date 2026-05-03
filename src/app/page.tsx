@@ -12,11 +12,14 @@ export const metadata: Metadata = {
     "Join ARTHO'S in creating positive change through volunteering, blood donation, book drives, and community development programs across Pakistan.",
 };
 
+import LegacyHighlight from "@/components/home/LegacyHighlight";
+
 export default function HomePage() {
   return (
     <>
       <Hero />
       <Programs />
+      <LegacyHighlight />
       <Values />
       <CtaBanner />
       <ImpactGallery />

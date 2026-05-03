@@ -15,9 +15,9 @@ export default function BlogHeader({ blog }) {
 
     return (
         <div 
-            className="relative bg-gradient-to-r from-blue-600 to-blue-700 text-white pt-32 pb-16 px-6 overflow-hidden"
+            className="relative bg-gradient-to-r from-[#1F6F3D] to-[#14532D] text-white pt-32 pb-16 px-6 overflow-hidden"
             style={blog.featuredImage ? {
-                backgroundImage: `linear-gradient(rgba(37, 99, 235, 0.85), rgba(29, 78, 216, 0.85)), url(${blog.featuredImage})`,
+                backgroundImage: `linear-gradient(rgba(20, 83, 45, 0.6), rgba(20, 83, 45, 0.6)), url(${blog.featuredImage})`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
             } : {}}
@@ -25,7 +25,7 @@ export default function BlogHeader({ blog }) {
             <div className="max-w-7xl mx-auto relative z-10">
                 <Link
                     href="/blogs"
-                    className="inline-flex items-center gap-2 text-blue-100 hover:text-white mb-6 transition-colors font-medium text-sm"
+                    className="inline-flex items-center gap-2 text-green-100 hover:text-white mb-6 transition-colors font-medium text-sm"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Back to all stories
@@ -42,21 +42,21 @@ export default function BlogHeader({ blog }) {
                 </motion.h1>
 
                 <motion.div
-                    className="flex flex-wrap items-center gap-6 text-blue-100 font-medium"
+                    className="flex flex-wrap items-center gap-6 text-green-50 font-medium"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.2 }}
                 >
                     <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
                         <Calendar className="w-4 h-4" />
-                        {formatDate(blog.publishedAt)}
+                        {formatDate(blog.publishedAt || blog.createdAt)}
                     </span>
                     <span className="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full border border-white/20">
                         <Clock className="w-4 h-4" />
                         {blog.readTime} min read
                     </span>
                     {blog.author && (
-                        <span className="px-2">by <strong className="text-white underline decoration-blue-400 underline-offset-4">{blog.author.name}</strong></span>
+                        <span className="px-2">by <strong className="text-white underline decoration-[#E8D3A5] underline-offset-4">{blog.author.username || 'Artho Admin'}</strong></span>
                     )}
                 </motion.div>
             </div>

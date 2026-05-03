@@ -46,7 +46,13 @@ export const metadata: Metadata = {
     description:
       "Making a positive impact through education, health, and community service in Pakistan.",
   },
+  icons: {
+    icon: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
 };
+
+import { Toaster } from "react-hot-toast";
 
 export default function RootLayout({
   children,
@@ -56,6 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${outfit.variable}`}>
       <body className="flex flex-col min-h-screen antialiased">
+        <Toaster position="top-right" />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

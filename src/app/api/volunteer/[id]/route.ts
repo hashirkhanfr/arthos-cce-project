@@ -12,11 +12,11 @@ export async function PATCH(
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  const { id } = params;
+  const { id } = await params;
   const body = await request.json();
 
   await connectDB();
-  const updated = await Volunteer.findByIdAndUpdate(id, body, { new: true });
+  const updated = await Volunteer.findByIdAndUpdate(id, body, { returnDocument: 'after' });
 
   if (!updated) {
     return NextResponse.json({ message: "Not found" }, { status: 404 });
@@ -34,7 +34,7 @@ export async function DELETE(
     return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
   }
 
-  const { id } = params;
+  const { id } = await params;
 
   await connectDB();
   const deleted = await Volunteer.findByIdAndDelete(id);

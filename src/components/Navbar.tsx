@@ -12,7 +12,7 @@ const navLinks = [
   { label: "Donate Blood", href: "/blood-donation" },
   { label: "Donate Books", href: "/book-donation" },
   { label: "Gallery", href: "/gallery" },
-  { label: "Blog", href: "/blog" },
+  { label: "Blog", href: "/blogs" },
 ];
 
 export default function Navbar() {
@@ -29,24 +29,17 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
+    <header className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
       <div className="container-arthos">
         <nav className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 shrink-0">
-            <span className="flex items-center justify-center w-9 h-9 rounded-full bg-[#1F6F3D] text-white">
-              <Heart size={18} strokeWidth={2.5} />
-            </span>
-            <div className="flex flex-col leading-tight">
-              <span
-                className="text-lg font-bold text-[#1F6F3D] tracking-tight"
-                style={{ fontFamily: "Outfit, sans-serif" }}
-              >
-                ARTHO&apos;S
-              </span>
-              <span className="text-[10px] text-gray-500 uppercase tracking-widest hidden sm:block">
-                Humanitarian Society
-              </span>
+          <Link href="/" className="flex items-center shrink-0">
+            <div className="relative h-16 w-32 overflow-hidden">
+              <img 
+                src="/images/logo-trans.png" 
+                alt="ARTHO'S Logo" 
+                className="w-full h-full object-contain"
+              />
             </div>
           </Link>
 
@@ -129,9 +122,8 @@ export default function Navbar() {
                     {link.label}
                     <ChevronDown
                       size={14}
-                      className={`transition-transform ${
-                        openDropdown === link.label ? "rotate-180" : ""
-                      }`}
+                      className={`transition-transform ${openDropdown === link.label ? "rotate-180" : ""
+                        }`}
                     />
                   </button>
                   {openDropdown === link.label && (

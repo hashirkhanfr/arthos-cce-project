@@ -12,7 +12,7 @@ export async function GET() {
         await connectDB();
 
         const blogs = await Blog.find({ status: 'published' })
-            .populate('author', 'name')
+            .populate('author', 'username')
             .sort({ publishedAt: -1 })
             .select('-content'); // Exclude full content for list view
 

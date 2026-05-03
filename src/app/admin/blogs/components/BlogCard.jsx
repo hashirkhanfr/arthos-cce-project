@@ -45,7 +45,7 @@ export default function BlogCard({ blog, onDelete }) {
                         {blog.author && (
                             <span className="flex items-center gap-1.5">
                                 <UserIcon className="w-3.5 h-3.5" />
-                                {blog.author.name}
+                                {blog.author.username}
                             </span>
                         )}
                     </div>

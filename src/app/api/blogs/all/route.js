@@ -18,7 +18,7 @@ export async function GET() {
         await connectDB();
 
         const blogs = await Blog.find({})
-            .populate('author', 'name')
+            .populate('author', 'username')
             .sort({ createdAt: -1 });
 
         return NextResponse.json({

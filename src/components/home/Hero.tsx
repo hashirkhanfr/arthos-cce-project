@@ -23,9 +23,9 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Content: Hero Text */}
           <div className="max-w-2xl text-left">
-            <span className="inline-flex items-center gap-2 px-4 sm:py-2 py-0 rounded-full bg-white/15 backdrop-blur-sm text-sm font-medium mb-6 border border-white/20">
-              <Heart size={14} />
-              Serving Pakistan Since 2018
+            <span className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md text-xs font-black uppercase tracking-[0.2em] mb-8 border border-white/10 text-[#E8D3A5]">
+              <Heart size={14} className="fill-[#E8D3A5]" />
+              Serving Pakistan Since 2010
             </span>
 
             <h1

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import BlogHeader from './BlogHeader';
 import BlogSidebar from './BlogSidebar';
 import BlogShare from './BlogShare';
+import './blog.css';
 
 export default function BlogClient({ blog, relatedBlogs }) {
     return (
@@ -44,28 +45,6 @@ export default function BlogClient({ blog, relatedBlogs }) {
                 </div>
             </div>
 
-            {/* Global Content Styles */}
-            <style dangerouslySetInnerHTML={{ __html: `
-                .blog-content {
-                    font-size: 1.15rem;
-                    line-height: 1.8;
-                    color: #374151;
-                }
-                .blog-content h1, .blog-content h2, .blog-content h3 {
-                    color: #111827;
-                    font-family: 'Outfit', sans-serif;
-                    margin-top: 2.5rem;
-                    margin-bottom: 1.25rem;
-                }
-                .blog-content p { margin-bottom: 1.5rem; }
-                .blog-content img { width: 100%; border-radius: 1.5rem; box-shadow: 0 20px 50px rgba(0,0,0,0.1); }
-                .blog-content a { color: #1F6F3D; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; transition: all 0.2s; }
-                .blog-content a:hover { color: #14532D; text-decoration-color: #14532D; }
-                .blog-content ul { list-style: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; }
-                .blog-content ol { list-style: decimal; padding-left: 1.5rem; margin-bottom: 1.5rem; }
-                .blog-content li { margin-bottom: 0.5rem; }
-                .blog-content blockquote { border-left: 5px solid #1F6F3D; padding: 1.5rem 2rem; background: #f9fafb; border-radius: 1rem; font-style: italic; font-size: 1.25rem; }
-            ` }} />
         </div>
     );
 }

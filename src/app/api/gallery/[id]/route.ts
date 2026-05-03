@@ -33,7 +33,7 @@ export async function PUT(request, { params }) {
         const collection = await GalleryCollection.findByIdAndUpdate(
             id,
             { title, description, images, status },
-            { new: true, runValidators: true }
+            { returnDocument: 'after', runValidators: true }
         );
 
         if (!collection) {

@@ -7,6 +7,9 @@ import {
   Users,
   Droplets,
   BookOpen,
+  BookText,
+  Image as ImageIcon,
+  User,
   LogOut,
   Heart,
 } from "lucide-react";
@@ -14,9 +17,12 @@ import { signOut } from "next-auth/react";
 
 const sidebarLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
+  { href: "/admin/blogs", label: "Blogs", icon: BookText },
+  { href: "/admin/gallery", label: "Gallery", icon: ImageIcon },
   { href: "/admin/volunteers", label: "Volunteers", icon: Users },
   { href: "/admin/blood-donors", label: "Blood Donors", icon: Droplets },
   { href: "/admin/book-donations", label: "Book Donations", icon: BookOpen },
+  { href: "/admin/profile", label: "Profile", icon: User },
 ];
 
 export default function AdminSidebar() {

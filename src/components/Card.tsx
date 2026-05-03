@@ -29,14 +29,14 @@ export default function Card({
       className={`bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm card-hover ${className}`}
     >
       {image && (
-        <div className="relative w-full h-52 overflow-hidden">
+        <div className="relative w-full aspect-square overflow-hidden bg-gray-50">
           <img
             src={image}
             alt={title}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
           {badge && (
-            <span className="absolute top-3 left-3 text-xs font-semibold px-3 py-1 rounded-full bg-white text-gray-700 shadow-sm">
+            <span className="absolute top-4 left-4 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-lg bg-white/90 backdrop-blur-sm text-[#1F6F3D] shadow-lg">
               {badge}
             </span>
           )}

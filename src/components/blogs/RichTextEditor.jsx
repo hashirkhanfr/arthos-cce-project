@@ -11,7 +11,7 @@ import {
     Bold, Italic, Underline as UnderlineIcon, List, ListOrdered, 
     Quote, Undo, Redo, Heading1, Heading2, Heading3, Link as LinkIcon, ImageIcon, Type
 } from 'lucide-react';
-import toast from 'react-hot-toast';
+import './editor.css';
 
 export default function RichTextEditor({ content, onChange, placeholder = 'Start writing...' }) {
     const editor = useEditor({
@@ -284,130 +284,6 @@ export default function RichTextEditor({ content, onChange, placeholder = 'Start
             <div className="editor-content-wrapper overflow-y-auto flex-1">
                 <EditorContent editor={editor} />
             </div>
-
-            {/* WYSIWYG Styles - matching blog display */}
-            <style jsx global>{`
-                .editor-content-wrapper .ProseMirror {
-                    font-size: 1.125rem;
-                    line-height: 1.75;
-                    color: #374151;
-                }
-
-                .editor-content-wrapper .ProseMirror h1 {
-                    font-size: 2.25rem;
-                    font-weight: 700;
-                    margin-top: 1.5rem;
-                    margin-bottom: 1rem;
-                    color: #111827;
-                    line-height: 1.2;
-                    font-family: var(--font-poppins), 'Poppins', system-ui, sans-serif;
-                }
-
-                .editor-content-wrapper .ProseMirror h2 {
-                    font-size: 1.875rem;
-                    font-weight: 700;
-                    margin-top: 1.5rem;
-                    margin-bottom: 0.75rem;
-                    color: #111827;
-                    line-height: 1.3;
-                    font-family: var(--font-poppins), 'Poppins', system-ui, sans-serif;
-                }
-
-                .editor-content-wrapper .ProseMirror h3 {
-                    font-size: 1.5rem;
-                    font-weight: 600;
-                    margin-top: 1.25rem;
-                    margin-bottom: 0.5rem;
-                    color: #1f2937;
-                    line-height: 1.4;
-                    font-family: var(--font-poppins), 'Poppins', system-ui, sans-serif;
-                }
-
-                .editor-content-wrapper .ProseMirror p {
-                    margin-bottom: 1rem;
-                }
-
-                .editor-content-wrapper .ProseMirror strong {
-                    font-weight: 700;
-                    color: #111827;
-                }
-
-                .editor-content-wrapper .ProseMirror em {
-                    font-style: italic;
-                }
-
-                .editor-content-wrapper .ProseMirror u {
-                    text-decoration: underline;
-                }
-
-                .editor-content-wrapper .ProseMirror ul {
-                    list-style-type: disc;
-                    margin-left: 1.5rem;
-                    margin-bottom: 1rem;
-                }
-
-                .editor-content-wrapper .ProseMirror ol {
-                    list-style-type: decimal;
-                    margin-left: 1.5rem;
-                    margin-bottom: 1rem;
-                }
-
-                .editor-content-wrapper .ProseMirror li {
-                    margin-bottom: 0.375rem;
-                    padding-left: 0.25rem;
-                }
-
-                .editor-content-wrapper .ProseMirror li p {
-                    margin-bottom: 0.25rem;
-                }
-
-                .editor-content-wrapper .ProseMirror img {
-                    max-width: 100%;
-                    height: auto;
-                    border-radius: 0.75rem;
-                    margin: 1.5rem auto;
-                    display: block;
-                    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-                }
-
-                .editor-content-wrapper .ProseMirror blockquote {
-                    border-left: 4px solid #2563eb;
-                    padding-left: 1.25rem;
-                    margin: 1.25rem 0;
-                    font-style: italic;
-                    color: #4b5563;
-                    background-color: #f8fafc;
-                    padding: 1rem 1.25rem;
-                    border-radius: 0 0.5rem 0.5rem 0;
-                }
-
-                .editor-content-wrapper .ProseMirror a {
-                    color: #2563eb;
-                    text-decoration: underline;
-                    cursor: pointer;
-                }
-
-                .editor-content-wrapper .ProseMirror a:hover {
-                    color: #1d4ed8;
-                }
-
-                .editor-content-wrapper .ProseMirror p.is-editor-empty:first-child::before {
-                    content: attr(data-placeholder);
-                    float: left;
-                    color: #9ca3af;
-                    pointer-events: none;
-                    height: 0;
-                }
-
-                .editor-content-wrapper .ProseMirror:focus {
-                    outline: none;
-                }
-
-                /* Selection styling */
-                .editor-content-wrapper .ProseMirror ::selection {
-                    background: #bfdbfe;
-                }
-            `}</style>
         </div>
     );
 }
