@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import User from '@/models/User';
 import { auth } from '@/lib/auth';
@@ -7,7 +7,9 @@ import bcrypt from 'bcryptjs';
 export async function GET() {
     try {
         const session = await auth();
-        if (!session) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+        if (!session || !session.user?.id) {
+            return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+        }
 
         await connectDB();
         const user = await User.findById(session.user.id).select('-password');
@@ -17,10 +19,12 @@ export async function GET() {
     }
 }
 
-export async function PUT(request) {
+export async function PUT(request: NextRequest) {
     try {
         const session = await auth();
-        if (!session) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+        if (!session || !session.user?.id) {
+            return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+        }
 
         await connectDB();
         const { username, password } = await request.json();
@@ -35,6 +39,7 @@ export async function PUT(request) {
 
         return NextResponse.json({ success: true, data: user });
     } catch (error) {
-        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+        const message = error instanceof Error ? error.message : 'Failed to fetch profile';
+        return NextResponse.json({ success: false, error: message }, { status: 500 });
     }
 }

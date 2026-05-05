@@ -5,7 +5,18 @@ import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, X, Heart, ChevronDown } from "lucide-react";
 
-const navLinks = [
+type NavChild = {
+  label: string;
+  href: string;
+};
+
+type NavLink = {
+  label: string;
+  href: string;
+  children?: NavChild[];
+};
+
+const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Volunteer With Us", href: "/volunteer" },

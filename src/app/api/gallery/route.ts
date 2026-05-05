@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import GalleryCollection from '@/models/GalleryCollection';
 import { auth } from '@/lib/auth';
@@ -13,7 +13,7 @@ export async function GET() {
     }
 }
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
     try {
         const session = await auth();
         if (!session) {
@@ -37,6 +37,7 @@ export async function POST(request) {
 
         return NextResponse.json({ success: true, data: collection }, { status: 201 });
     } catch (error) {
-        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+        const message = error instanceof Error ? error.message : 'Failed to create gallery collection';
+        return NextResponse.json({ success: false, error: message }, { status: 500 });
     }
 }

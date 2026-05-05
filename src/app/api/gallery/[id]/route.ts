@@ -1,10 +1,13 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { connectDB } from '@/lib/mongodb';
 import GalleryCollection from '@/models/GalleryCollection';
 import { auth } from '@/lib/auth';
 import cloudinary from '@/lib/cloudinary';
 
-export async function GET(request, { params }) {
+export async function GET(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
         await connectDB();
         const { id } = await params;
@@ -18,7 +21,10 @@ export async function GET(request, { params }) {
     }
 }
 
-export async function PUT(request, { params }) {
+export async function PUT(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
         const session = await auth();
         if (!session) {
@@ -42,11 +48,15 @@ export async function PUT(request, { params }) {
 
         return NextResponse.json({ success: true, data: collection });
     } catch (error) {
-        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+        const message = error instanceof Error ? error.message : 'Failed to update collection';
+        return NextResponse.json({ success: false, error: message }, { status: 500 });
     }
 }
 
-export async function DELETE(request, { params }) {
+export async function DELETE(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
         const session = await auth();
         if (!session) {
@@ -74,6 +84,7 @@ export async function DELETE(request, { params }) {
 
         return NextResponse.json({ success: true, message: 'Collection deleted' });
     } catch (error) {
-        return NextResponse.json({ success: false, error: error.message }, { status: 500 });
+        const message = error instanceof Error ? error.message : 'Failed to delete collection';
+        return NextResponse.json({ success: false, error: message }, { status: 500 });
     }
 }

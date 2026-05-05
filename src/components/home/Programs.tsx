@@ -34,7 +34,7 @@ const programs = [
     description:
       "Every contribution directly funds healthcare, education, and disaster relief programs.",
     icon: Heart,
-    href: "/donate",
+    href: "/contact",
     badge: "Donate Now",
     image: "/images/solar installment/529795874_18496602295067653_8819664083452530924_n.jpg",
   },

@@ -1,14 +1,31 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Maximize2, ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default function GalleryClient({ collections }) {
-    const [selectedCollection, setSelectedCollection] = useState(null);
+type GalleryImage = {
+    url: string;
+    public_id: string;
+};
+
+type GalleryCollection = {
+    _id: string;
+    title: string;
+    description?: string;
+    images: GalleryImage[];
+    status: 'draft' | 'published';
+};
+
+interface GalleryClientProps {
+    collections: GalleryCollection[];
+}
+
+export default function GalleryClient({ collections }: GalleryClientProps) {
+    const [selectedCollection, setSelectedCollection] = useState<GalleryCollection | null>(null);
     const [currentIndex, setCurrentIndex] = useState(0);
 
-    const openLightbox = (collection) => {
+    const openLightbox = (collection: GalleryCollection) => {
         setSelectedCollection(collection);
         setCurrentIndex(0);
         document.body.style.overflow = 'hidden';
@@ -19,13 +36,15 @@ export default function GalleryClient({ collections }) {
         document.body.style.overflow = 'auto';
     };
 
-    const nextImage = (e) => {
+    const nextImage = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
+        if (!selectedCollection) return;
         setCurrentIndex((prev) => (prev + 1) % selectedCollection.images.length);
     };
 
-    const prevImage = (e) => {
+    const prevImage = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
+        if (!selectedCollection) return;
         setCurrentIndex((prev) => (prev - 1 + selectedCollection.images.length) % selectedCollection.images.length);
     };
 

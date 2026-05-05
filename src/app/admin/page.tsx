@@ -6,11 +6,16 @@ import {
   Users,
   BookOpen,
   Image as ImageIcon,
-  BarChart3,
   Heart,
   Droplets,
 } from "lucide-react";
 import Link from "next/link";
+import { connectDB } from "@/lib/mongodb";
+import Volunteer from "@/models/Volunteer";
+import BloodDonor from "@/models/BloodDonor";
+import Blog from "@/models/Blog";
+import GalleryCollection from "@/models/GalleryCollection";
+import BookDonation from "@/models/BookDonation";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard | ARTHO'S",
@@ -28,10 +33,41 @@ export default async function DashboardPage() {
   const session = await auth();
   if (!session) redirect("/admin/login");
 
+  await connectDB();
+  
+  let stats = {
+    volunteers: 0,
+    donors: 0,
+    blogs: 0,
+    galleryImages: 0,
+    bookDonations: 0,
+  };
+
+  try {
+    const [vCount, dCount, bCount, collections, bookCount] = await Promise.all([
+      Volunteer.countDocuments(),
+      BloodDonor.countDocuments(),
+      Blog.countDocuments(),
+      GalleryCollection.find({}, 'images'),
+      BookDonation.countDocuments(),
+    ]);
+
+    // Calculate total images across all collections
+    const totalImages = collections.reduce((acc, col) => acc + (col.images?.length || 0), 0);
+
+    stats = {
+      volunteers: vCount,
+      donors: dCount,
+      blogs: bCount,
+      galleryImages: totalImages,
+      bookDonations: bookCount,
+    };
+  } catch (error) {
+    console.error("Error fetching dashboard stats:", error);
+  }
+
   return (
     <div className="min-h-screen bg-gray-50">
-
-
       <div className="max-w-5xl mx-auto px-6 py-12">
         <div className="mb-10">
           <h1
@@ -41,43 +77,65 @@ export default async function DashboardPage() {
             Welcome back, {session.user?.name}
           </h1>
           <p className="text-gray-500 mt-1">
-            Manage your website content from this dashboard.
+            Manage your website content and track organization impact.
           </p>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-10">
+        <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-gray-400 mb-2">Impact snapshot</p>
+            <h2 className="text-3xl font-bold text-gray-900">Quick stats</h2>
+          </div>
+          <p className="text-sm text-gray-500 max-w-xl">
+            Overview of current engagement, content, and collection performance for your admin dashboard.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 mb-10">
           {[
-            { label: "Total Volunteers", icon: Users, value: "—" },
-            { label: "Blood Donors", icon: Droplets, value: "—" },
-            { label: "Blog Posts", icon: BookOpen, value: "—" },
-            { label: "Gallery Images", icon: ImageIcon, value: "—" },
-          ].map(({ label, icon: Icon, value }) => (
-            <div key={label} className="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
-              <Icon size={20} className="text-[#1F6F3D] mb-3" />
-              <div className="text-2xl font-bold text-gray-900">{value}</div>
-              <div className="text-xs text-gray-500 mt-0.5">{label}</div>
+            { label: "Volunteers", icon: Users, value: stats.volunteers, color: "#7C3AED" },
+            { label: "Blood Donors", icon: Droplets, value: stats.donors, color: "#EF4444" },
+            { label: "Blog Posts", icon: BookOpen, value: stats.blogs, color: "#1F6F3D" },
+            { label: "Gallery Imgs", icon: ImageIcon, value: stats.galleryImages, color: "#C9A86A" },
+            { label: "Books", icon: BookOpen, value: stats.bookDonations, color: "#3B82F6" },
+          ].map(({ label, icon: Icon, value, color }) => (
+            <div
+              key={label}
+              className="group overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-sm transition-shadow hover:shadow-lg"
+            >
+              <div className="flex items-center justify-between gap-4 p-5 border-b border-gray-100">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.3em] text-gray-400">{label}</p>
+                  <p className="mt-3 text-3xl font-bold text-gray-900">{value}</p>
+                </div>
+                <div
+                  className="flex h-14 w-14 items-center justify-center rounded-3xl"
+                  style={{ backgroundColor: `${color}1A`, color }}
+                >
+                  <Icon size={24} />
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
         {/* Admin Actions */}
-        <h2 className="text-lg font-bold text-gray-900 mb-5">
-          <LayoutDashboard size={18} className="inline mr-2" />
-          Quick Actions
+        <h2 className="text-lg font-bold text-gray-900 mb-5 flex items-center gap-2">
+          <LayoutDashboard size={20} className="text-gray-400" />
+          Management Tools
         </h2>
-        <div className="grid sm:grid-cols-2 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {adminLinks.map(({ href, label, icon: Icon, color }) => (
             <Link
               key={href}
               href={href}
-              className="flex items-center gap-4 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-[#1F6F3D]/30 hover:shadow-md transition-all"
+              className="flex items-center gap-4 p-5 bg-white rounded-2xl border border-gray-100 shadow-sm hover:border-[#1F6F3D]/30 hover:shadow-md transition-all group"
             >
               <div
-                className="w-11 h-11 rounded-xl flex items-center justify-center"
-                style={{ backgroundColor: `${color}15` }}
+                className="w-12 h-12 rounded-xl flex items-center justify-center transition-colors"
+                style={{ backgroundColor: `${color}10` }}
               >
-                <Icon size={20} style={{ color }} />
+                <Icon size={24} style={{ color }} className="group-hover:scale-110 transition-transform" />
               </div>
               <span className="font-semibold text-gray-800">{label}</span>
             </Link>
