@@ -12,8 +12,10 @@ import {
   User,
   LogOut,
   Heart,
+  X
 } from "lucide-react";
 import { signOut } from "next-auth/react";
+import Image from "next/image";
 
 const sidebarLinks = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard },
@@ -25,7 +27,11 @@ const sidebarLinks = [
   { href: "/admin/profile", label: "Profile", icon: User },
 ];
 
-export default function AdminSidebar() {
+interface AdminSidebarProps {
+  onClose?: () => void;
+}
+
+export default function AdminSidebar({ onClose }: AdminSidebarProps) {
   const pathname = usePathname();
 
   if (pathname === "/admin/login") {
@@ -34,15 +40,26 @@ export default function AdminSidebar() {
 
   return (
     <aside className="w-64 bg-white border-r border-gray-100 flex flex-col h-screen sticky top-0 overflow-hidden">
-      <div className="p-6 border-b border-gray-100">
-        <Link href="/admin" className="flex items-center gap-2">
-          <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[#1F6F3D] text-white shrink-0">
-            <Heart size={15} />
-          </span>
+      <div className="p-6 border-b border-gray-100 flex items-center justify-between">
+        <Link href="/admin" className="flex items-center gap-3" onClick={onClose}>
+          <Image 
+            src="/images/logo-trans.png" 
+            alt="ARTHO'S Logo" 
+            width={32} 
+            height={32} 
+            className="object-contain"
+          />
           <span className="font-bold text-gray-900 truncate" style={{ fontFamily: "Outfit, sans-serif" }}>
             ARTHO&apos;S Admin
           </span>
         </Link>
+        {/* Mobile Close Button */}
+        <button 
+          onClick={onClose}
+          className="lg:hidden p-1 text-gray-500 hover:bg-gray-100 rounded-lg transition-colors"
+        >
+          <X size={20} />
+        </button>
       </div>
 
       <nav className="flex-1 p-4 space-y-1 overflow-y-auto custom-scrollbar">
@@ -53,6 +70,7 @@ export default function AdminSidebar() {
             <Link
               key={link.href}
               href={link.href}
+              onClick={onClose}
               className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-colors ${
                 isActive
                   ? "bg-[#1F6F3D]/10 text-[#1F6F3D] font-medium"
