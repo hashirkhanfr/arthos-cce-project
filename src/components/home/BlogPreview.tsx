@@ -5,7 +5,7 @@ import { connectDB } from "@/lib/mongodb";
 import Blog from "@/models/Blog";
 
 export default async function BlogPreview() {
-  let blogs = [];
+  let blogs: any[] = [];
   try {
     await connectDB();
     blogs = await Blog.find({ status: 'published' })

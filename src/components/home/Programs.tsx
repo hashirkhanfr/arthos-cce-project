@@ -18,7 +18,7 @@ const programs = [
     icon: Droplets,
     href: "/blood-donation",
     badge: "Save Lives",
-    image: "/images/blooddonation.png",
+    image: "/images/BloodDonation.png",
   },
   {
     title: "Book Donation Campaign",
@@ -27,7 +27,7 @@ const programs = [
     icon: BookOpen,
     href: "/book-donation",
     badge: "Empower Youth",
-    image: "/images/bookdonation.png",
+    image: "/images/BookDonation.png",
   },
   {
     title: "Financial Donations",
