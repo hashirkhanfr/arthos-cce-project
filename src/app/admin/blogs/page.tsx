@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { BookOpen } from "lucide-react";
 import { auth } from "@/lib/auth";
 import BlogManager from "./BlogManager";
 

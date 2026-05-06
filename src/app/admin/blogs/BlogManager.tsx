@@ -145,12 +145,16 @@ export default function BlogManager() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
                   <FormInput
+                    id="blog-title"
+                    name="title"
                     label="Title"
                     value={editingBlog.title || ""}
                     onChange={(e) => setEditingBlog({ ...editingBlog, title: e.target.value })}
                     required
                   />
                   <FormInput
+                    id="blog-cover-image"
+                    name="coverImage"
                     label="Cover Image URL"
                     value={editingBlog.coverImage || ""}
                     onChange={(e) => setEditingBlog({ ...editingBlog, coverImage: e.target.value })}
@@ -158,12 +162,16 @@ export default function BlogManager() {
                   />
                   <div className="grid grid-cols-2 gap-4">
                     <FormInput
+                      id="blog-author"
+                      name="author"
                       label="Author"
                       value={editingBlog.author || ""}
                       onChange={(e) => setEditingBlog({ ...editingBlog, author: e.target.value })}
                       required
                     />
                     <FormInput
+                      id="blog-category"
+                      name="category"
                       label="Category"
                       value={editingBlog.category || ""}
                       onChange={(e) => setEditingBlog({ ...editingBlog, category: e.target.value })}
@@ -198,7 +206,7 @@ export default function BlogManager() {
                 <label className="text-sm font-medium text-gray-700">Content</label>
                 <RichTextEditor 
                   content={editingBlog.content || ""} 
-                  onChange={(html) => setEditingBlog({ ...editingBlog, content: html })} 
+                  onChange={(html: string) => setEditingBlog({ ...editingBlog, content: html })} 
                 />
               </div>
 

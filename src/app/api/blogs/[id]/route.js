@@ -1,12 +1,15 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server'; // Added NextRequest
 import { connectDB } from '@/lib/mongodb';
 import Blog from '@/models/Blog';
 import cloudinary from '@/lib/cloudinary';
 import { auth } from '@/lib/auth';
 import { slugify } from '@/utils/slugify';
 
-// GET single blog by ID (protected)
-export async function GET(request, { params }) {
+// 1. Updated GET signature
+export async function GET(
+    request: NextRequest, 
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
         const session = await auth();
 
@@ -42,8 +45,11 @@ export async function GET(request, { params }) {
     }
 }
 
-// PUT update blog by ID (protected)
-export async function PUT(request, { params }) {
+// 2. Updated PUT signature
+export async function PUT(
+    request: NextRequest, 
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
         const session = await auth();
 
@@ -60,7 +66,6 @@ export async function PUT(request, { params }) {
         const body = await request.json();
         let { title, slug, content, excerpt, featuredImage, status, seo, oldSlugs } = body;
 
-        // Find existing blog
         const existingBlog = await Blog.findById(id);
         if (!existingBlog) {
             return NextResponse.json(
@@ -69,24 +74,19 @@ export async function PUT(request, { params }) {
             );
         }
 
-        // Handle slug changes and automated oldSlugs tracking
         const newSlug = slugify(slug || title);
         let updatedOldSlugs = oldSlugs || existingBlog.oldSlugs || [];
 
         if (newSlug !== existingBlog.slug) {
-            // Push current slug to oldSlugs if it's not already there
             if (!updatedOldSlugs.includes(existingBlog.slug)) {
                 updatedOldSlugs.push(existingBlog.slug);
             }
         }
         
-        // Final slug enforcement
         slug = newSlug;
 
-        // Upload featured image to Cloudinary if provided as Base64
         if (featuredImage && featuredImage.startsWith('data:image')) {
             try {
-                // Delete old image if it exists on Cloudinary
                 if (existingBlog.featuredImage && existingBlog.featuredImage.includes('cloudinary.com')) {
                     try {
                         const oldPublicId = existingBlog.featuredImage.split('/').slice(-2).join('/').split('.')[0];
@@ -106,10 +106,8 @@ export async function PUT(request, { params }) {
             }
         }
 
-        // Upload SEO OG image if provided as Base64
         if (seo?.ogImage && seo.ogImage.startsWith('data:image')) {
             try {
-                // Delete old OG image if it exists on Cloudinary
                 if (existingBlog.seo?.ogImage && existingBlog.seo.ogImage.includes('cloudinary.com')) {
                     try {
                         const oldOgPublicId = existingBlog.seo.ogImage.split('/').slice(-2).join('/').split('.')[0];
@@ -129,7 +127,6 @@ export async function PUT(request, { params }) {
             }
         }
 
-        // Update blog
         const blog = await Blog.findByIdAndUpdate(
             id,
             {
@@ -150,10 +147,9 @@ export async function PUT(request, { params }) {
             data: blog,
         });
 
-    } catch (error) {
+    } catch (error: any) { // Typed error as any for compatibility
         console.error('Error updating blog:', error);
 
-        // Handle duplicate slug error
         if (error.code === 11000) {
             return NextResponse.json(
                 { success: false, error: 'A blog with this slug already exists' },
@@ -168,8 +164,11 @@ export async function PUT(request, { params }) {
     }
 }
 
-// DELETE blog by ID (protected)
-export async function DELETE(request, { params }) {
+// 3. Updated DELETE signature
+export async function DELETE(
+    request: NextRequest, 
+    { params }: { params: Promise<{ id: string }> }
+) {
     try {
         const session = await auth();
 
@@ -184,7 +183,6 @@ export async function DELETE(request, { params }) {
 
         const { id } = await params;
 
-        // Find blog
         const blog = await Blog.findById(id);
         if (!blog) {
             return NextResponse.json(
@@ -193,7 +191,6 @@ export async function DELETE(request, { params }) {
             );
         }
 
-        // Delete images from Cloudinary if they exist
         if (blog.featuredImage && blog.featuredImage.includes('cloudinary.com')) {
             try {
                 const publicId = blog.featuredImage.split('/').slice(-2).join('/').split('.')[0];
@@ -212,7 +209,6 @@ export async function DELETE(request, { params }) {
             }
         }
 
-        // Delete blog
         await Blog.findByIdAndDelete(id);
 
         return NextResponse.json({
